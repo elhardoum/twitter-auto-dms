@@ -1,0 +1,75 @@
+<main class="text-grey-darkest py-8">
+    <div class="w-full max-w-lg m-auto px-2">
+        <h2 class="font-thin text-black tracking-light text-3xl mb-6">Settings</h2>
+
+        {{#if errors.length }}
+            <div class="bg-orange-lightest border-l-4 border-red mb-6 p-4 text-red-dark" role="alert">
+                <p class="font-bold mb-2 uppercase">Errors</p>
+                <ul class="text-xs pl-4">
+                    {{#each errors}}
+                        <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+        {{/if}}
+
+        <form method="post">
+            <div class="mb-4">
+                <label class="block text-grey-darker text-sm font-bold mb-2" for="schedule">DMs Schedule</label>
+
+                <div class="flex items-center">
+                    <input class="appearance-none border rounded py-2 px-3 text-grey-darker leading-tight mr-2"
+                        placeholder="Schedule quantity" type="number" min="0" step="1" name="schedule" id="schedule" value="{{formdata.schedule}}" />
+                    
+                    <div class="inline-block relative">
+                        <select class="appearance-none border leading-tight px-3 py-2 rounded text-grey-darker w-full pr-6"
+                            name="schedule_unit">
+                            <option value="minute" {{#ifeq 'minute' formdata.schedule_unit}}selected="selected"{{/ifeq}}>Minutes</option>
+                            <option value="hour" {{#ifeq 'hour' formdata.schedule_unit}}selected="selected"{{/ifeq}}>Hours</option>
+                            <option value="day" {{#ifeq 'day' formdata.schedule_unit}}selected="selected"{{/ifeq}}>Days</option>
+                        </select>
+                        <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <small class="table text-xs text-grey-darker mt-1">How soon do you want to send a welcome message after a new user follows you? Set as
+                    <code class="text-red-light bg-grey-lighter px-1">0</code> for instant DMs.</small>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-grey-darker text-sm font-bold mb-2">Toggle status</label>
+            
+                <label class="text-sm flex items-center">
+                    <input type="checkbox" name="enabled" {{#if formdata.enabled}}checked="checked"{{/if}} />
+                    <span class="ml-1">Enable DMs for this schedule.</span>
+                </label>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-grey-darker text-sm font-bold mb-2" for="format">Format Message</label>
+            
+                <textarea class="appearance-none border rounded py-2 px-3 text-grey-darker leading-tight w-full text-sm"
+                    placeholder="Thank you for following, @\{{screenName}}! Check out my Mixtape at my Soundcloud (link in bio)." name="format" id="format" rows="6">{{formdata.format}}</textarea>
+            
+                <div class="table text-xs text-grey-darker mt-1">
+                    <h4 class="table mb-2">Accepted Parameters:</h4>
+                    <p class="table mb-2"><code class="text-red-light bg-grey-lighter px-1">\{{screenName}}</code>: user screen name without @</p>
+                    <p class="table mb-2"><code class="text-red-light bg-grey-lighter px-1">\{{name}}</code>: user display name</p>
+                </div>
+            </div>
+
+            <button type="submit" class="border hover:bg-blue hover:border-blue hover:text-white inline-block leading-none no-underline px-6 py-2 rounded text-blue-dark">Submit</button>
+        </form>
+
+        <p class="text-sm mt-6"><a class="text-blue underline" href="/dash">&larr; Back to Dashboard</a></p>
+
+    </div>
+</main>
+
+{{#extend "scripts"}}
+<script>history.replaceState({}, {}, location.href)</script>
+{{/extend}}

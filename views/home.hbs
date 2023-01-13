@@ -1,0 +1,15 @@
+<main class="m-auto table text-grey-darkest py-8">
+    <div class="w-full max-w-lg m-auto px-2">
+        <h2 class="font-thin text-black tracking-light text-3xl mb-6 text-center">Welcome to Twitter Auto DMs!</h2>
+        <p class="text-grey-darker text-center">Connect a Twitter Handle to get started.</p>
+
+        {{#unless envTested}}
+        <div class="bg-orange-lightest border-l-4 border-red mt-8 p-4 text-red-dark" role="alert">
+            <p class="font-bold mb-2 uppercase">Action Required</p>
+            <small class="table">Please update your
+                <code class="bg-grey-light px-1">.env</code>
+                file and include the required Twitter API environment variables.</small>
+        </div>
+        {{/unless}}
+    </div>
+</main>

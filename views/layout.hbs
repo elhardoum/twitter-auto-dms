@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full" style="background:#fbfbfb">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{#if title}}{{title}} &mdash; {{else}}{{/if}}Twitter Auto DMs</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/tailwindcss@0.7.4/dist/tailwind.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Alegreya&family=Roboto:wght@100;300;500&display=swap" />
+    {{{block "stylesheets"}}}
+</head>
+<body class="h-full w-full">
+    <div class="flex flex-col h-full">
+        <div class="p-6 shadow" style="background:#00acee">
+            <nav class="flex flex-wrap items-center justify-between max-w-lg m-auto">
+                <a href="{{#if logged_in}}/dash{{else}}/{{/if}}" class="font-bold no-underline text-white text-xl tracking-tight uppercase">Twitter Auto DMs</a>
+
+                {{#if logged_in}}
+                    <span class="flex-1"></span>
+                    <a class="cursor-pointer inline-block leading-none underline text-sm text-white" href="/dash/settings">Settings</a>
+
+                    <a href="/auth/signout"
+                        onclick="return !! confirm('Are you sure?')"
+                        class="-my-2 border cursor-pointer hover:bg-white hover:text-blue inline-flex leading-none ml-4 no-underline px-4 py-2 rounded-sm text-black text-white text-xs">Sign Out</a>
+                {{else}}
+                    <a href="/auth/redirect"
+                        class="-my-2 border cursor-pointer hover:bg-white hover:text-blue inline-flex leading-none ml-4 no-underline px-4 py-2 rounded-sm text-black text-white text-xs">Connect via Twitter</a>
+                {{/if}}
+            </nav>
+        </div>
+        
+        {{{body}}}
+    </div>
+
+    {{{block "scripts"}}}
+</body>
+</html>

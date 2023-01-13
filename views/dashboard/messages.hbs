@@ -1,0 +1,68 @@
+{{#extend "stylesheets"}}
+<style type="text/css">table > tbody > tr:nth-child(even) {background-color: #f1f5f8;}</style>
+{{/extend}}
+
+<main class="text-grey-darkest py-8">
+    <div class="w-full max-w-lg m-auto px-2">
+        <h2 class="font-thin text-black tracking-light text-3xl mb-6">Messages</h2>
+
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="text-sm font-semibold tracking-wide text-left text-gray uppercase select-none bg-grey-lighter">
+                    <td class="px-4 py-2">
+                        Recipient
+                    </td>
+                    <td class="px-4 py-2">
+                        Message
+                    </td>
+                    <td class="px-4 py-2">
+                        Status
+                    </td>
+                </tr>
+            </thead>
+            <tbody class="bg-white">
+                {{#each items}}
+                    <tr>
+                        <td class="px-4 py-2">
+                            <a class="text-blue underline" href="https://twitter.com/intent/user?user_id={{recipientId}}">@{{recipientScreenName}}</a>
+                        </td>
+                        <td class="px-4 py-2">
+                            <p class="whitespace-pre-line">{{~message~}}</p>
+                            {{#if sentDate}}
+                                <small class="table text-xs text-grey-dark mt-2 select-none">
+                                    Sent: {{sentDateIso}}
+                                </small>
+                            {{/if}}
+                        </td>
+                        <td class="px-4 py-2 select-none">
+                            <span class="text-xs rounded-sm py-1 px-2 uppercase tracking-wide text-white {{#ifeq 'sent' status}}bg-green-light{{else}}{{#ifeq 'error' status}}bg-red{{else}}bg-grey{{/ifeq}}{{/ifeq}}"
+                                style="font-size: x-small;">{{status}}</span>
+                        </td>
+                    </tr>
+                {{/each}}
+
+                {{#unless items}}
+                    <tr>
+                        <td class="px-4 py-2" colspan="3">
+                            <p class="italic text-center text-grey-dark py-2 select-none">No messages found.</p>
+                        </td>
+                    </tr>
+                {{/unless}}
+            </tbody>
+        </table>
+
+        <div class="flex items-center justify-between mb-4 mt-4 select-none">
+            <span class="flex-1"></span>
+
+            {{#if paged.previous}}
+                <a class="border hover:bg-grey-light mr-3 no-underline px-3 py-0 rounded-sm text-blue underline" title="Previous page" href="/dash/dms/{{paged.previous}}">&lsaquo;</a>
+            {{/if}}
+
+            <span class="mr-3 text-grey-dark text-xs">page {{page}}</span>
+
+            {{#if paged.next}}
+                <a class="border hover:bg-grey-light no-underline px-3 py-0 rounded-sm text-blue underline" title="Next page" href="/dash/dms/{{paged.next}}">&rsaquo;</a>
+            {{/if}}
+        </div>
+    </div>
+</main>
