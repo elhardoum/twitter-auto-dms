@@ -38,6 +38,7 @@
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
+    "@shelf/jest-mongodb": "^4.1.6",
     "@types/cookie-parser": "^1.4.3",
     "@types/cron": "^2.0.0",
     "@types/express": "^4.17.13",
@@ -74,6 +75,7 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "preset": "@shelf/jest-mongodb"
   }
 }
