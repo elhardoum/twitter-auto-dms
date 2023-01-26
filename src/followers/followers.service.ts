@@ -4,7 +4,7 @@ import { tmpdir } from 'os'
 import { join } from 'path'
 import { MongoClient, ObjectId } from 'mongodb'
 import { TwitterApi } from 'twitter-api-v2'
-import { SettingsService } from 'src/settings/settings.service'
+import { SettingsService } from './../settings/settings.service'
 
 // eslint-disable-next-line
 const lockfile = require('lockfile')
