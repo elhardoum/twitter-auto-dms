@@ -6,6 +6,7 @@ export class MessagesService {
   private readonly logger = new Logger(MessagesService.name)
 
   async getMessages(
+    senderId: string,
     page: number,
     pageSize = +process.env.MESSAGES_PER_PAGE || 20,
   ): Promise<WithPagesMeta<DirectMessage[]>> {
@@ -17,7 +18,7 @@ export class MessagesService {
       const dms = db.collection<DirectMessage>('messages')
       resolve(
         await dms
-          .find()
+          .find({ senderId })
           .skip(page > 0 ? (page - 1) * pageSize : 0)
           .limit(pageSize + 1)
           .sort({ _id: -1 })

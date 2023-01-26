@@ -7,7 +7,10 @@ export class MessagesController {
   constructor(private readonly messagesService: MessagesService) {}
 
   async view(@Res() res: Response, page = 1): Promise<void> {
-    const data = await this.messagesService.getMessages(page)
+    const data = await this.messagesService.getMessages(
+      res.locals.profile.userId,
+      page,
+    )
 
     return res.render('dashboard/messages', {
       logged_in: res.locals.logged_in,
