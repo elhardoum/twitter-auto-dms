@@ -44,6 +44,18 @@ export class AuthController {
       return res.status(400).end()
     }
 
+    const authorized_handles = this.authService.getAuthorizedHandles()
+
+    // check if profile handle is whitelisted to use the service
+    if (
+      authorized_handles.length > 0 &&
+      -1 == authorized_handles.indexOf(profile.screenName.toLocaleLowerCase())
+    ) {
+      return res
+        .status(403)
+        .end(`@${profile.screenName} is not authorized to use this service.`)
+    }
+
     profile.sessId = this.authService.getRandomSessionId()
 
     if (await this.authService.persistProfile(profile)) {

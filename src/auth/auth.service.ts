@@ -8,6 +8,14 @@ const uuid4 = require('uuid4')
 
 @Injectable()
 export class AuthService {
+  getAuthorizedHandles(): string[] {
+    return (process.env.AUTHORIZED_HANDLES || '')
+      .replace(/\s/g, ',')
+      .split(',')
+      .map((h) => h.trim().toLowerCase())
+      .filter(Boolean)
+  }
+
   getApiClient(args?: { [key: string]: string }): TwitterApi {
     return new TwitterApi({
       appKey: process.env.TWITTER_API_KEY,
