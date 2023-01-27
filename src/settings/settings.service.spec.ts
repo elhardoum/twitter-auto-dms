@@ -4,7 +4,7 @@ import { SettingsService } from './settings.service'
 describe('SettingsService', () => {
   let service: SettingsService
 
-  beforeAll(async () => {
+  beforeAll(() => {
     process.env.MONGODB_URI = process.env.MONGO_URL
   })
 
@@ -20,7 +20,7 @@ describe('SettingsService', () => {
     expect(service).toBeDefined()
   })
 
-  it('mongodb data persistence', async () => {
+  it('persists settings', async () => {
     const sampleSchedule = {
       schedule: 1,
       schedule_unit: UserScheduleUnit.Minute,
