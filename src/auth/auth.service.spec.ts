@@ -25,7 +25,7 @@ describe('AuthService', () => {
   })
 
   it('returns list of whitelisted handles', () => {
-    process.env.AUTHORIZED_HANDLES = '   , jack,     jesse     walter'
+    process.env.AUTHORIZED_HANDLES = '   , Jack,     jesse     walter'
     expect(service.getAuthorizedHandles()).toStrictEqual([
       'jack',
       'jesse',

@@ -41,7 +41,7 @@ $ npm run test:cov
 ## Todo
 
 - [x] base functionality
-- [ ] unit tests
+- [x] unit tests
 - [ ] documentation
 - [ ] heroku deployment
 - [ ] fix safari cookies issue
