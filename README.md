@@ -1,6 +1,6 @@
 # Twitter Auto DMs
 
-Send automated messages (DMs) to your new Twitter followers (work-in-progress)
+Send automated messages (DMs) to your new Twitter followers
 
 ![Imgur Image](http://i.imgur.com/71UgxiP.jpg)
 
@@ -43,5 +43,5 @@ $ npm run test:cov
 - [x] base functionality
 - [x] unit tests
 - [ ] documentation
-- [ ] heroku deployment
+- [ ] docker deployment
 - [ ] fix safari cookies issue
