@@ -1,0 +1,33 @@
+name: deploy docker image
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - run: npm install
+    - run: npm run build
+    - run: npm test
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: docker login
+      env:
+        USER: ${{ secrets.DOCKER_USERNAME }}
+        PASS: ${{ secrets.DOCKER_PASSWORD }}
+      run: docker login -u "$USER" -p "$PASS"
+    - name: build images
+      run: docker build --no-cache . -t twitter-auto-dms
+    - name: docker tag
+      run: docker image tag twitter-auto-dms elhardoum/twitter-auto-dms:latest
+    - name: docker push
+      run: docker image push elhardoum/twitter-auto-dms:latest

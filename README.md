@@ -4,17 +4,19 @@ Send automated messages (DMs) to your new Twitter followers
 
 ![Imgur Image](https://i.imgur.com/71UgxiP.jpg)
 
-## Installation
-
-```sh
-npm install
-```
-
 ## Running the app
 
 Copy `.env.sample` to `.env` and add your environment variables.
 
 The project uses mongodb for persisting data. You're expected to provide a mongodb connection string via the `MONGODB_URI` environment variable. You may use mongodb atlas for a free cloud database instance, or skip to the docker instructions if you don't wish to install mongodb and/or the app.
+
+First, install the app dependencies, if not done already
+
+```sh
+npm install
+```
+
+Then, you may run the app any of the following modes:
 
 ```sh
 # development
@@ -64,7 +66,7 @@ docker run --rm -p 3000:80 \
   elhardoum/twitter-auto-dms:latest
 ```
 
-The app should briefly be running at `http://127.0.0.1:3000`. Once everything works, you may consider running the app in detached mode via `docker run -d ...`
+The app should briefly be running at `http://127.0.0.1:3000`. Once everything works, you may consider running the app in detached mode via `docker run -d ...`, and/or restart on errors `--restart always` (without passing the `--rm` flag).
 
 ## Test
 
